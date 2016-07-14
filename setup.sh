@@ -10,11 +10,11 @@ label="Sample Drive"
 
 if [ 1 -eq $# ] ; then
 	if [ "clean" == "$1" ] ; then
-		rm -f ./*.txt ./*.png ./*${tag}.gplot
+		rm -f ./stat_${tag}.txt ./${tag}*.png ./*${tag}.gplot
 		exit
 	fi
 fi
 
-./statistics_analysis.py ${tag}.log ${period} ${tag} ${input_unit} ${output_unit} "${label}" >> ./stat.txt
+./statistics_analysis.py ${tag}.log ${period} ${tag} ${input_unit} ${output_unit} "${label}" >> ./stat_${tag}.txt
 gnuplot interval_plot_${tag}.gplot
 gnuplot delay_plot_${tag}.gplot
