@@ -5,7 +5,7 @@
 # Description: It prints statistics -
 #       release interval, send interval, release jitter, response time, send point.
 #       And It saves statistics files for graph.
-# Usage: ./statistics_analysis.py <your_data> <task_period> <tag> <input_unit> <output_unit> <Label>
+# Usage: ./statistics_analysis.py <data file> <task_period> <input_unit> <output_unit> <Label>
 # I am using this at Python version 2.7
 
 import sys
@@ -20,16 +20,18 @@ unit_convert = {
     "s" : 1000000000
 }
 
-if len(sys.argv) < 7 :
-    print "usage : %s <your_data> <task_period> <tag> <input_unit> <output_unit> <Label>"%sys.argv[0]
+if len(sys.argv) < 6 :
+    print "usage : %s <data file> <task_period> <input_unit> <output_unit> <Label>"%sys.argv[0]
+    sys.exit(-1)
 
+tag_name = os.path.splitext(os.path.split(sys.argv[1])[1])[0]
 file_data_input = open(sys.argv[1], 'r')
-period = float(sys.argv[2])
-tag_name = sys.argv[3]
+script_path = os.path.join(os.path.split(__file__)[0], "")
 
-input_unit = sys.argv[4]
-output_unit = sys.argv[5]
-graph_label = sys.argv[6]
+period = float(sys.argv[2])
+input_unit = sys.argv[3]
+output_unit = sys.argv[4]
+graph_label = sys.argv[5]
 scaler = float(unit_convert[input_unit]) / unit_convert[output_unit]
 
 release_interval = []
@@ -65,11 +67,11 @@ for i in range(length):
         break
 
 # write to file
-file_release_interval = open("release_interval_" + tag_name + ".txt", 'w')
-file_send_point_interval = open("send_point_interval_" + tag_name + ".txt", 'w')
-file_release_jitter = open("release_jitter_" + tag_name + ".txt", 'w')
-file_response_time = open("response_time_" + tag_name + ".txt", 'w')
-file_send_point = open("send_point_" + tag_name + ".txt", 'w')
+file_release_interval = open(tag_name + "_release_interval.txt", 'w')
+file_send_point_interval = open(tag_name + "_send_point_interval.txt", 'w')
+file_release_jitter = open(tag_name + "_release_jitter.txt", 'w')
+file_response_time = open(tag_name + "_response_time.txt", 'w')
+file_send_point = open(tag_name + "_send_point.txt", 'w')
 
 for i in range(length):
     try:
@@ -110,7 +112,7 @@ _send_point_max = max(send_point)
 
 # statistics
 print "+++++++++++++++ statistics +++++++++++++++"
-print "data file name: %s"%(sys.argv[1])
+print "data file name: %s"%(os.path.split(sys.argv[1])[1])
 print "data size: %s"%(length)
 print "task period: %s%s"%(period * scaler, output_unit)
 print "tag name: %s"%(tag_name)
@@ -150,10 +152,10 @@ print "max: %s"%(_send_point_max * scaler)
 print "stdev: %s"%(numpy.std(send_point) * scaler)
 
 # prepare plot files
-file_interval_template = open("interval_plot_template.gplot", 'r')
+file_interval_template = open(script_path + "interval_plot_template.gplot", 'r')
 interval_template = file_interval_template.read()
 file_interval_template.close()
-file_delay_template = open("delay_plot_template.gplot", 'r')
+file_delay_template = open(script_path + "delay_plot_template.gplot", 'r')
 delay_template = file_delay_template.read()
 file_delay_template.close()
 
@@ -205,9 +207,9 @@ delay_template = delay_template % {
     "period" : str(period * scaler) + output_unit,
 }
 
-file_interval_plot = open("interval_plot_" + tag_name + ".gplot", 'w')
+file_interval_plot = open(tag_name + "_interval_plot.gplot", 'w')
 file_interval_plot.write(interval_template)
 file_interval_plot.close()
-file_delay_plot = open("delay_plot_" + tag_name + ".gplot", 'w')
+file_delay_plot = open(tag_name + "_delay_plot.gplot", 'w')
 file_delay_plot.write(delay_template)
 file_delay_plot.close()

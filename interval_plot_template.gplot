@@ -15,8 +15,8 @@ set ytics %(ytics)s
 
 set ylabel "release interval (%(unit)s)"
 set output "%(tag_name)s_release_interval.png"
-plot "release_interval_%(tag_name)s.txt" using (%(scaler)s*$1) t "%(label)s : %(period)s Control Period"
+plot "%(tag_name)s_release_interval.txt" using (%(scaler)s*$1) t "%(label)s : %(period)s Control Period"
 
 set ylabel "send point interval (%(unit)s)"
 set output "%(tag_name)s_send_point_interval.png"
-plot "send_point_interval_%(tag_name)s.txt" using (%(scaler)s*$1) t "%(label)s : %(period)s Control Period"
+plot "%(tag_name)s_send_point_interval.txt" using (%(scaler)s*$1) t "%(label)s : %(period)s Control Period"

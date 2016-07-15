@@ -15,8 +15,8 @@ set ytics %(ytics)s
 
 set ylabel "response time (%(unit)s)"
 set output "%(tag_name)s_response_time.png"
-plot "response_time_%(tag_name)s.txt" using (%(scaler)s*$1) t "%(label)s : %(period)s Control Period"
+plot "%(tag_name)s_response_time.txt" using (%(scaler)s*$1) t "%(label)s : %(period)s Control Period"
 
 set ylabel "send point (%(unit)s)"
 set output "%(tag_name)s_send_point.png"
-plot "send_point_%(tag_name)s.txt" using (%(scaler)s*$1) t "%(label)s : %(period)s Control Period"
+plot "%(tag_name)s_send_point.txt" using (%(scaler)s*$1) t "%(label)s : %(period)s Control Period"
