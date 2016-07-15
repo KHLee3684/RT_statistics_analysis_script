@@ -2,18 +2,47 @@
 Statistics analysis script for Real-Time experimental data
 
 ###usage
->run : <br>
+>
 `
-$ ./setup.sh
+$ ./setup.sh <data file> <mode>
 `<br>
->clean : <br>
-`
-$ ./setup.sh clean
-`<br>
+>data file : your data file name<br>
+>mode : "1col" or "2col" or "clean"<br>
+>>1col : analysis for 1 column data<br>
+>>2col : analysis for 2 column data<br>
+>>clean : delete all created files<br>
+
+>results will be created in [tag]_result directory.<br>
 
 ###you can change variables in setup.sh file :
->tag : log file's name (if log file name is "1ms.log", tag should be "1ms")<br>
 >period : control period (input unit)<br>
->input_unit : unit for scaling, in log value's unit (s, ms, us, ns)<br>
->output_unit : unit for scaling for result (s, ms, us, ns)<br>
+>input_unit : log value's unit (s, ms, us, ns)<br>
+>output_unit : result value's unit (s, ms, us, ns)<br>
 >label : graph label<br>
+
+###example
+>####for sample/1col_sample.txt data
+>>check setup.sh file :<br>
+`
+period=0.001
+`<br>
+`
+input_unit=s
+`<br>
+>>start analysis:<br>
+`
+$ ./setup.sh sample/1col_sample.txt 1col
+`
+
+>####for sample/2col_sample.log data
+>>check setup.sh file :<br>
+`
+period=1000000
+`<br>
+`
+input_unit=ns
+`<br>
+>>start analysis:<br>
+`
+$ ./setup.sh sample/2col_sample.log 2col
+`<br>
