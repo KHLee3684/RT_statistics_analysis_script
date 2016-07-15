@@ -10,7 +10,7 @@ label="Sample Drive"
 
 if [ 1 -eq $# ] ; then
 	if [ "clean" == "$1" ] ; then
-		rm -f ./stat_${tag}.txt ./${tag}*.png ./*${tag}.gplot
+		rm -f ./*${tag}.txt ./${tag}*.png ./*${tag}.gplot
 		exit
 	fi
 fi
