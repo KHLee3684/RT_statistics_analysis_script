@@ -1,7 +1,7 @@
 # RT_statistics_analysis_script
 Statistics analysis script for Real-Time experimental data
 
-###usage
+### usage
 >
 `
 $ ./setup.sh <data file> <mode>
@@ -14,14 +14,14 @@ $ ./setup.sh <data file> <mode>
 
 >results will be created in [tag]_result directory.<br>
 
-###you can change variables in setup.sh file :
+### you can change variables in setup.sh file :
 >period : control period (input unit)<br>
 >input_unit : log value's unit (s, ms, us, ns)<br>
 >output_unit : result value's unit (s, ms, us, ns)<br>
 >label : graph label<br>
 
-###example
->####for sample/1col_sample.txt data
+### example
+>#### for sample/1col_sample.txt data
 >>check setup.sh file :<br>
 `
 period=0.001
@@ -34,7 +34,7 @@ input_unit=s
 $ ./setup.sh sample/1col_sample.txt 1col
 `
 
->####for sample/2col_sample.log data
+>#### for sample/2col_sample.log data
 >>check setup.sh file :<br>
 `
 period=1000000
